@@ -1,0 +1,19 @@
+{
+  "name": "gulp-typescript-ref",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && rimraf pub && gulp"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-util": "^3.0.6",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "rimraf": "^2.4.3"
+  }
+}
