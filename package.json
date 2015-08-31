@@ -1,6 +1,6 @@
 {
   "name": "gulp-typescript-ref",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Gulp plugin that filters out TypeScript files not referenced from a provided array of files",
   "main": "index.js",
   "repository": {

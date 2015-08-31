@@ -31,7 +31,7 @@ var filter = function(sources) {
     }
   };
 
-  // List of referenced files -- make a copy of sources to start
+  // List of referenced file names -- make a copy of sources to start
   var referencedFiles = [];
   for (var index in sources) {
     addToReferences(sources[index]);
@@ -40,8 +40,8 @@ var filter = function(sources) {
   // Regex for finding file references
   var refRegEx = /^\s*\/\/\/\s*<reference\s+path=['"](.*)['"]\s*\/>\s*$/mg;
 
-  // List of actual Vinyl file objects
-  var fileList = [];
+  // Map of paths to Vinyl file objects
+  var fileMap = {};
 
   var bufferContents = function(file, encoding, callback) {
     // Ignore empty files
@@ -57,28 +57,41 @@ var filter = function(sources) {
       return;
     }
 
-    // Get base path of file path
-    var basePath = path.dirname(file.path);
-
-    // Loop over contents using regex exec
-    var contents = file.contents.toString('utf8');
-
-    var match = refRegEx.exec(contents);
-    while (match) {
-      addToReferences(match[1], basePath);
-      match = refRegEx.exec(contents);
-    }
-
-    fileList.push(file);
+    fileMap[normalizeFilename(file.path)] = file;
     callback();
   };
 
-  var endStream = function(callback) {
-    for (var index in fileList) {
-      var file = fileList[index];
-      if (referencedFiles.indexOf(normalizeFilename(file.path)) >= 0) {
-        this.push(file);
+  // Loop over referencedFiles and keep adding to it until we run out of
+  // files to add. We rely on addToReferences doing a uniqueness check to
+  // prevent infinite looping on circular references.
+  var checkReferences = function() {
+    var i = 0;
+    while (i < referencedFiles.length) {
+      var filename = referencedFiles[i];
+      var file = fileMap[filename];
+
+      // Get base path of file path
+      var basePath = path.dirname(file.path);
+
+      // Loop over contents using regex exec
+      var contents = file.contents.toString('utf8');
+
+      var match = refRegEx.exec(contents);
+      while (match) {
+        addToReferences(match[1], basePath);
+        match = refRegEx.exec(contents);
       }
+
+      i += 1;
+    }
+  };
+
+  var endStream = function(callback) {
+    checkReferences();
+    for (var index in referencedFiles) {
+      var filename = referencedFiles[index];
+      var file = fileMap[filename];
+      this.push(file);
     }
     callback();
   };
