@@ -4,7 +4,9 @@ Gulp plugin that filters out files not referenced from a provided array of files
 
 I was having problems with [gulp-typescript](https://github.com/ivogabe/gulp-typescript)'s
 `referencedFrom` filter, so I made a simple Gulp plugin that uses a RegEx to approximate
-what it's supposed to do. **This plugin is NOT a replacement for `gulp-typescript`. It is
+what it's supposed to do.
+
+**This plugin is NOT a replacement for `gulp-typescript`. It is
 mean to be used in conjunction with it.**
 
 Install with `npm install gulp-typescript-ref --save-dev`
