@@ -1,8 +1,16 @@
 {
   "name": "gulp-typescript-ref",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Gulp plugin that filters out TypeScript files not referenced from a provided array of files",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fongandrew/gulp-typescript-ref.git"
+  },
+  "homepage": "https://github.com/fongandrew/gulp-typescript-ref/",
+  "bugs": {
+    "url": "https://github.com/fongandrew/gulp-typescript-ref/"
+  },
   "scripts": {
     "test": "cd test && rimraf pub && gulp"
   },
