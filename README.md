@@ -6,6 +6,9 @@ I was having problems with [gulp-typescript](https://github.com/ivogabe/gulp-typ
 `referencedFrom` filter, so I made a simple Gulp plugin that uses a RegEx to approximate
 what it's supposed to do.
 
+**This plugin is NOT a replacement for `gulp-typescript`. It is
+mean to be used in conjunction with it.**
+
 Install with `npm install gulp-typescript-ref --save-dev`
 
 Use it like this:
