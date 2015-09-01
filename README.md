@@ -7,7 +7,7 @@ I was having problems with [gulp-typescript](https://github.com/ivogabe/gulp-typ
 what it's supposed to do.
 
 **This plugin is NOT a replacement for `gulp-typescript`. It is
-mean to be used in conjunction with it.**
+meant to be used in conjunction with it.**
 
 Install with `npm install gulp-typescript-ref --save-dev`
 
