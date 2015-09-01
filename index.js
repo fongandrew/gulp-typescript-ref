@@ -69,6 +69,7 @@ var filter = function(sources) {
     while (i < referencedFiles.length) {
       var filename = referencedFiles[i];
       var file = fileMap[filename];
+      if (! file) { error("Unable to resolve " + filename); }
 
       // Get base path of file path
       var basePath = path.dirname(file.path);
@@ -91,6 +92,7 @@ var filter = function(sources) {
     for (var index in referencedFiles) {
       var filename = referencedFiles[index];
       var file = fileMap[filename];
+      if (! file) { error("Unable to resolve " + filename); }
       this.push(file);
     }
     callback();
